@@ -8,3 +8,7 @@ const cssMin = require('gulp-cssmin');
 const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
+
+const clear = () =>{
+    return del(['app'])
+}
