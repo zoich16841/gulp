@@ -32,6 +32,12 @@ const styles = () =>{
         .pipe(browserSync.stream())
 }
 
+const scripts = () =>{
+    return src('src/js/**/*.js')
+        .pipe(dest('app/js/'))
+        .pipe(browserSync.stream())
+}
+
 const watcher = () =>{
     browserSync.init({
         server: {
@@ -40,7 +46,8 @@ const watcher = () =>{
     })
 
     watch(['src/**/*.html'], htmlInclude);
-    watch(['src/scss/**/*.scss'], styles)
+    watch(['src/scss/**/*.scss'], styles);
+    watch(['src/js/**/*.js'], scripts);
 }
 
-exports.default = series(clear, htmlInclude, styles, watcher);
+exports.default = series(clear, htmlInclude, styles, scripts, watcher);
