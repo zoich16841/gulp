@@ -5,7 +5,7 @@ const filrInclude = require('gulp-file-include');
 const del = require('del');
 const gulpIf = require  ('gulp-if')
 const cssMin = require('gulp-cssmin');
-const scss = require('gulp-sass')(require('sass'))
+const sass = require('gulp-sass')(require('sass'))
 const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
@@ -27,7 +27,7 @@ const htmlInclude = () =>{
 
 const styles = () =>{
     return src('src/scss/**/*.scss')
-        .pipe(scss().on('error', scss.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(dest('app/'))
         .pipe(browserSync.stream())
 }
@@ -35,6 +35,26 @@ const styles = () =>{
 const scripts = () =>{
     return src('src/js/**/*.js')
         .pipe(dest('app/js/'))
+        .pipe(browserSync.stream())
+}
+
+const images = () =>{
+    return src('src/img/**/*.{png, jpeg, jpg}')
+        .pipe(dest('app/img'))
+        .pipe(browserSync.stream())
+}
+
+const webpImages = () =>{
+    return src('src/img/**/*.{png, jpeg, jpg}')
+        .pipe(webp())
+        .pipe(dest('app/img/'))
+        .pipe(browserSync.stream())
+}
+
+const avifImages = () =>{
+    return src('src/img/**/*.{png, gpeg, jpg}')
+        .pipe(avif())
+        .pipe(dest('app/img'))
         .pipe(browserSync.stream())
 }
 
@@ -48,6 +68,7 @@ const watcher = () =>{
     watch(['src/**/*.html'], htmlInclude);
     watch(['src/scss/**/*.scss'], styles);
     watch(['src/js/**/*.js'], scripts);
+    watch(['src/img/**/*,{png, jpeg, jpg}'], images)
 }
 
-exports.default = series(clear, htmlInclude, styles, scripts, watcher);
+exports.default = series(clear, htmlInclude, styles, scripts, images, webpImages, avifImages, watcher);
