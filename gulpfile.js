@@ -5,6 +5,7 @@ const filrInclude = require('gulp-file-include');
 const del = require('del');
 const gulpIf = require  ('gulp-if')
 const cssMin = require('gulp-cssmin');
+const scss = require('gulp-sass')(require('sass'))
 const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
@@ -24,6 +25,13 @@ const htmlInclude = () =>{
         .pipe(browserSync.stream())
 }
 
+const styles = () =>{
+    return src('src/scss/**/*.scss')
+        .pipe(scss().on('error', scss.logError))
+        .pipe(dest('app/'))
+        .pipe(browserSync.stream())
+}
+
 const watcher = () =>{
     browserSync.init({
         server: {
@@ -32,6 +40,7 @@ const watcher = () =>{
     })
 
     watch(['src/**/*.html'], htmlInclude);
+    watch(['src/scss/**/*.scss'], styles)
 }
 
-exports.default = series(clear, htmlInclude, watcher);
+exports.default = series(clear, htmlInclude, styles, watcher);
