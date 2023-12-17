@@ -9,6 +9,7 @@ const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
 
+
 const clear = () =>{
     return del(['app'])
 }
@@ -19,5 +20,18 @@ const htmlInclude = () =>{
             prefix: '@',
             basepath: '@file'
         }))
-        .pipe(dest('app'))
+        .pipe(dest('app/'))
+        .pipe(browserSync.stream())
 }
+
+const watcher = () =>{
+    browserSync.init({
+        server: {
+            baseDir: 'app'
+        }
+    })
+
+    watch(['src/**/*.html'], htmlInclude);
+}
+
+exports.default = series(clear, htmlInclude, watcher);
