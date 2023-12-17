@@ -12,3 +12,12 @@ const webp = require('gulp-webp');
 const clear = () =>{
     return del(['app'])
 }
+
+const htmlInclude = () =>{
+    return src('src/**/*.html')
+        .pipe(filrInclude({
+            prefix: '@',
+            basepath: '@file'
+        }))
+        .pipe(dest('app'))
+}
