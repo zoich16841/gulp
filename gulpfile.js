@@ -88,4 +88,4 @@ const toProd = (done) => {
 }
 
 exports.default = series(clear, htmlInclude, styles, scripts, images, webpImages, avifImages, watcher);
-exports.build = series(toProd, clear, htmlInclude, styles, scripts, images, avifImages,webpImages)
+exports.build = series(toProd, clear, htmlInclude, styles, scripts, images, avifImages, webpImages)
