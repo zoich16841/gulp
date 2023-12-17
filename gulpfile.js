@@ -10,6 +10,8 @@ const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
 
+let isProd = false;
+
 
 const clear = () =>{
     return del(['app'])
@@ -21,6 +23,9 @@ const htmlInclude = () =>{
             prefix: '@',
             basepath: '@file'
         }))
+        .pipe(gulpIf(isProd, htmlMin({
+            collapseWhitespace: true
+        })))
         .pipe(dest('app/'))
         .pipe(browserSync.stream())
 }
@@ -28,6 +33,12 @@ const htmlInclude = () =>{
 const styles = () =>{
     return src('src/scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoPrefixer({
+            cascade: false,
+            grid: true,
+            overrideBrowsersList: ['Last 5 versions']
+        }))
+        .pipe(gulpIf(isProd, cssMin()))
         .pipe(dest('app/'))
         .pipe(browserSync.stream())
 }
@@ -71,4 +82,10 @@ const watcher = () =>{
     watch(['src/img/**/*,{png, jpeg, jpg}'], images)
 }
 
+const toProd = (done) => {
+    isProd = true;
+    done()
+}
+
 exports.default = series(clear, htmlInclude, styles, scripts, images, webpImages, avifImages, watcher);
+exports.build = series(toProd, clear, htmlInclude, styles, scripts, images, avifImages,webpImages)
