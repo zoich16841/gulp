@@ -9,12 +9,12 @@ html {
   *::after {
     box-sizing: inherit;
   }
-  .is-grid {
-    margin: 0 var(--grid_margin);
+  .grid {
     display: grid;
-    align-items: start;
-    row-gap: 15px;
-    column-gap: percentage(30 / 1840);
+  }
+
+  .flex{
+    display: flex;
   }
   
   .page__body {
