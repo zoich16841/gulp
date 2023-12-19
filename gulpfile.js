@@ -1,7 +1,7 @@
 const { src, dest, watch, series } = require('gulp');
 const browserSync = require('browser-sync').create();
 const autoPrefixer = require('gulp-autoprefixer');
-const filrInclude = require('gulp-file-include');
+const fileInclude = require('gulp-file-include');
 const del = require('del');
 const gulpIf = require  ('gulp-if')
 const cssMin = require('gulp-cssmin');
@@ -19,7 +19,7 @@ const clear = () =>{
 
 const htmlInclude = () =>{
     return src('src/**/*.html')
-        .pipe(filrInclude({
+        .pipe(fileInclude({
             prefix: '@',
             basepath: '@file'
         }))
