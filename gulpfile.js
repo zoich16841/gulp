@@ -95,7 +95,7 @@ const svgSprites = () =>{
       })
     )
     .pipe(replace('&gt;', '>'))
-    .pipe(sprite({
+    .pipe(sprites({
       mode: {
         stack: {
           sprite: "../sprite.svg"
