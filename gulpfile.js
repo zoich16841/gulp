@@ -9,6 +9,7 @@ const sass = require('gulp-sass')(require('sass'))
 const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
+const sprites = require('gulp-svg-sprite');
 
 let isProd = false;
 
@@ -50,22 +51,29 @@ const scripts = () =>{
 }
 
 const images = () =>{
-    return src('src/img/**/*.{png, jpeg, jpg}')
+    return src('src/img/*.{png, jpeg, jpg}')
         .pipe(dest('app/img'))
         .pipe(browserSync.stream())
 }
 
 const webpImages = () =>{
-    return src('src/img/**/*.{png, jpeg, jpg}')
+    return src('src/img/*.{png, jpeg, jpg}')
         .pipe(webp())
         .pipe(dest('app/img/'))
         .pipe(browserSync.stream())
 }
 
 const avifImages = () =>{
-    return src('src/img/**/*.{png, gpeg, jpg}')
+    return src('src/img/*.{png, gpeg, jpg}')
         .pipe(avif())
         .pipe(dest('app/img'))
+        .pipe(browserSync.stream())
+}
+
+const svgSprites = () =>{
+    return src('src/img/svg/*.svg')
+        .pipe(sprites())
+        .pipe(dest('app/img/svg'))
         .pipe(browserSync.stream())
 }
 
@@ -79,7 +87,8 @@ const watcher = () =>{
     watch(['src/**/*.html'], htmlInclude);
     watch(['src/scss/**/*.scss'], styles);
     watch(['src/js/**/*.js'], scripts);
-    watch(['src/img/**/*.{png, jpeg, jpg}'], images)
+    watch(['src/img/*.{png, jpeg, jpg}'], images)
+    watch(['src/img/svg/*.svg'], svgSprites)
 }
 
 const toProd = (done) => {
@@ -87,5 +96,5 @@ const toProd = (done) => {
     done()
 }
 
-exports.default = series(clear, htmlInclude, styles, scripts, images, webpImages, avifImages, watcher);
-exports.build = series(toProd, clear, htmlInclude, styles, scripts, images, avifImages, webpImages)
+exports.default = series(clear, htmlInclude, styles, scripts, images, webpImages, avifImages,svgSprites, watcher);
+exports.build = series(toProd, clear, htmlInclude, styles, scripts, images, avifImages, webpImages, svgSprites);

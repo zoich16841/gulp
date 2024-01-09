@@ -9,5 +9,15 @@
           "</picture>"
         ],
         "description": "Snippet for basic logo structure"
+      },
+      "svguse": {
+        "scope": "html",
+        "prefix": "m-use",
+        "body": [
+          "<svg class=\"\">",
+          "  <use xlink:href=\"img/sprite.svg#$2\"></use>",
+          "</svg>"
+        ],
+        "description": "Snippet for use svg sprites"
       }
 }
