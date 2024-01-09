@@ -15,7 +15,7 @@
         "prefix": "m-use",
         "body": [
           "<svg class=\"\">",
-          "  <use xlink:href=\"img/sprite.svg#$2\"></use>",
+          "  <use xlink:href=\"img/svg/sprite.svg#$2\"></use>",
           "</svg>"
         ],
         "description": "Snippet for use svg sprites"

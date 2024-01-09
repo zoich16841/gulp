@@ -67,7 +67,7 @@ const webpImages = () =>{
 }
 
 const avifImages = () =>{
-    return src('src/img/*.{png, gpeg, jpg}')
+    return src('src/img/*.{png, jpeg, jpg}')
         .pipe(avif())
         .pipe(dest('app/img'))
         .pipe(browserSync.stream())
