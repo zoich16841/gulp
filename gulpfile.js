@@ -10,6 +10,9 @@ const htmlMin = require('gulp-htmlmin');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
 const sprites = require('gulp-svg-sprite');
+const svgmin = require('gulp-svgmin');
+const cheerio = require('gulp-cheerio');
+const replace = require('gulp-replace');
 
 let isProd = false;
 
@@ -72,9 +75,35 @@ const avifImages = () =>{
 
 const svgSprites = () =>{
     return src('src/img/svg/*.svg')
-        .pipe(sprites())
-        .pipe(dest('app/img/svg'))
-        .pipe(browserSync.stream())
+    .pipe(
+      svgmin({
+        js2svg: {
+          pretty: true,
+        },
+      })
+    )
+    .pipe(
+      cheerio({
+        run: function ($) {
+          $('[fill]').removeAttr('fill');
+          $('[stroke]').removeAttr('stroke');
+          $('[style]').removeAttr('style');
+        },
+        parserOptions: {
+          xmlMode: true
+        },
+      })
+    )
+    .pipe(replace('&gt;', '>'))
+    .pipe(sprite({
+      mode: {
+        stack: {
+          sprite: "../sprite.svg"
+        }
+      },
+    }))
+    .pipe(dest('app/img/svg'))
+    .pipe(browserSync.stream())
 }
 
 const watcher = () =>{
