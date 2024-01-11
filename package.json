@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/zoich16841/gulp#readme",
   "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "babel-loader": "^9.1.3",
     "browser-sync": "^2.29.3",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
@@ -33,7 +36,9 @@
     "gulp-sass": "^5.1.0",
     "gulp-svg-sprite": "^2.0.3",
     "gulp-webp": "^4.0.1",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "webpack": "^5.89.0",
+    "webpack-stream": "^7.0.0"
   },
   "dependencies": {
     "gulp-cheerio": "^1.0.0",

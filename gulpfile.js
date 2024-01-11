@@ -7,6 +7,7 @@ const gulpIf = require  ('gulp-if')
 const cssMin = require('gulp-cssmin');
 const sass = require('gulp-sass')(require('sass'))
 const htmlMin = require('gulp-htmlmin');
+const webpackStream = require('webpack-stream');
 const avif = require('gulp-avif');
 const webp = require('gulp-webp');
 const sprites = require('gulp-svg-sprite');
@@ -48,7 +49,29 @@ const styles = () =>{
 }
 
 const scripts = () =>{
-    return src('src/js/**/*.js')
+    return src('src/js/main.js')
+        .pipe(webpackStream({
+          output: {
+            filename: 'main.js'
+          },
+          mode: 'development',
+          module: {
+            rules: [{
+              test: /\.m?js$/,
+              exclude: /node_modules/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: [
+                    ['@babel/preset-env', {
+                      targets: "defaults"
+                    }]
+                  ]
+                }
+              }
+            }]
+          }
+        }))
         .pipe(dest('app/js/'))
         .pipe(browserSync.stream())
 }
