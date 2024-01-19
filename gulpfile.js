@@ -77,7 +77,7 @@ const scripts = () =>{
 }
 
 const images = () =>{
-    return src('src/img/*.{png, jpeg, jpg}')
+    return src('src/img/**/*.{png, jpeg, jpg}')
         .pipe(dest('app/img'))
         .pipe(browserSync.stream())
 }
@@ -139,7 +139,7 @@ const watcher = () =>{
     watch(['src/**/*.html'], htmlInclude);
     watch(['src/scss/**/*.scss'], styles);
     watch(['src/js/**/*.js'], scripts);
-    watch(['src/img/*.{png, jpeg, jpg}'], images)
+    watch(['src/img/**/*.{png, jpeg, jpg}'], images)
     watch(['src/img/svg/*.svg'], svgSprites)
 }
 
