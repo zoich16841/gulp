@@ -155,5 +155,5 @@ const toProd = (done) => {
     done()
 }
 
-exports.default = series(clear, htmlInclude, styles, fonts, scripts, images, webpImages, avifImages,svgSprites, watcher);
-exports.build = series(toProd, clear, htmlInclude, styles, fonts, scripts, images, avifImages, webpImages, svgSprites);
+exports.default = series(clear, htmlInclude, styles, scripts, fonts, images, webpImages, avifImages,svgSprites, watcher);
+exports.build = series(toProd, clear, htmlInclude, styles, scripts, fonts, images, avifImages, webpImages, svgSprites);
