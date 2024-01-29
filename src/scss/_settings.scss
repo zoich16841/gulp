@@ -1,19 +1,24 @@
 html {
     box-sizing: border-box;
-    font-family: var(--font-family, sans-serif);
-    font-size: 16px;
-    line-height: 1;
-    height: 100%;
-    width: 100%;
-  }
-  h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
   }
   *,
   *::before,
   *::after {
     box-sizing: inherit;
   }
+
+  .page{
+    height: 100%;
+    font-family: var(--font-family), sans-serif;
+  }
+
+  .page-body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100%;
+    font-size: var(--font-size);
+  }
+
   .grid {
     display: grid;
   }
@@ -22,11 +27,6 @@ html {
     display: flex;
   }
   
-  .page__body {
-    margin: 0;
-    min-width: 320px;
-    min-height: 100%;
-  }
   
   img {
     height: auto;
