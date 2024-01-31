@@ -19,5 +19,15 @@
           "</svg>"
         ],
         "description": "Snippet for use svg sprites"
+      },
+      "burger": {
+        "scope": "html",
+        "prefix": "m-burger",
+        "body": [
+          "<button class=\"burger btn-reset\" aria-label=\"Открыть меню\" aria-expanded=\"false\"  data-burger>",
+          "  <span class=\"burger__line\"></span>",
+          "</button>"
+        ],
+        "description": "Snippet for burger btn"
       }
 }
