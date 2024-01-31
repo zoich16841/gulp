@@ -83,24 +83,24 @@ const fonts = ()=>{
 }
 
 const images = () =>{
-    return src('src/img/**/*.{png, jpeg, jpg}')
+    return src('src/img/**/*')
         .pipe(dest('app/img'))
         .pipe(browserSync.stream())
 }
 
 const webpImages = () =>{
-    return src('src/img/*.{png, jpeg, jpg}')
+    return src('src/img/**/*')
         .pipe(webp())
         .pipe(dest('app/img/'))
         .pipe(browserSync.stream())
 }
 
-const avifImages = () =>{
-    return src('src/img/*.{png, jpeg, jpg}')
-        .pipe(avif())
-        .pipe(dest('app/img'))
-        .pipe(browserSync.stream())
-}
+// const avifImages = () =>{
+//     return src('src/img/*')
+//         .pipe(avif())
+//         .pipe(dest('app/img'))
+//         .pipe(browserSync.stream())
+// }
 
 const svgSprites = () =>{
     return src('src/img/svg/*.svg')
@@ -146,7 +146,7 @@ const watcher = () =>{
     watch(['src/scss/**/*.scss'], styles);
     watch(['src/js/**/*.js'], scripts);
     watch(['src/fonts/*.{woff, woff2}'], fonts);
-    watch(['src/img/**/*.{png, jpeg, jpg}'], images);
+    watch(['src/img/**/*'], images);
     watch(['src/img/svg/*.svg'], svgSprites);
 }
 
@@ -155,5 +155,5 @@ const toProd = (done) => {
     done()
 }
 
-exports.default = series(clear, htmlInclude, styles, scripts, fonts, images, webpImages, avifImages,svgSprites, watcher);
-exports.build = series(toProd, clear, htmlInclude, styles, scripts, fonts, images, avifImages, webpImages, svgSprites);
+exports.default = series(clear, htmlInclude, styles, scripts, fonts, images, webpImages, svgSprites, watcher);
+exports.build = series(toProd, clear, htmlInclude, styles, scripts, fonts, images, webpImages, svgSprites);
