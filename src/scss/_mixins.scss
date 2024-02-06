@@ -1,0 +1,53 @@
+@mixin burger {
+    position: relative;
+    width: 22px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    &__line{
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 2px;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background: var(--burger-line-color);
+        transition: transform 0.3s ease-in-out;
+    }
+    &::after, &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 2px;
+        left: 0;
+        background: var(--burger-line-color);
+        transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+    }
+    &::after {
+        bottom: 0;
+    }
+    &::before{
+        top: 0;
+    }
+    &--active {
+        &::before {
+          top: 50%;
+          transform: rotate(45deg);
+          transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+        }
+    
+        &::after {
+          top: 50%;
+          transform: rotate(-45deg);
+          transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+        }
+    
+        .burger__line {
+          transform: scale(0);
+          transition: transform 0.3s ease-in-out;
+        }
+      }
+  }
+  
